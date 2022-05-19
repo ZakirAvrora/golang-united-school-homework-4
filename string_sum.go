@@ -29,20 +29,20 @@ func StringSum(input string) (output string, err error) {
 	runes := []rune(strings.ReplaceAll(input, " ", ""))
 
 	if len(runes) == 0 {
-		return "", errorEmptyInput
+		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
 
 	operands, ok := CheckTwoOperands(string(runes))
 
 	if !ok {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	sum := 0
 	for _, r := range operands {
 		num, err := strconv.Atoi(r)
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("%w", err)
 		}
 		sum += num
 	}
